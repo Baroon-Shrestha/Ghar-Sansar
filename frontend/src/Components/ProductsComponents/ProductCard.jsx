@@ -168,27 +168,12 @@ const HardwareStore = () => {
             <Card
               key={product.id}
               product={product}
-              onAddToCart={handleAddToCart}
+              // onAddToCart={handleAddToCart}
               onQuoteRequest={handleQuoteRequest}
             />
           ))}
         </div>
       </div>
-
-      {/* Optional Footer */}
-      {/* 
-      <div className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-8 mt-12">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="mb-2 text-lg">
-            📞 Bulk Orders: +91-98765-43210 | 📧 orders@buildmart.com
-          </p>
-          <p className="text-gray-400">
-            Free delivery on orders above ₹5,000 • Professional installation •
-            24/7 support
-          </p>
-        </div>
-      </div> 
-      */}
     </div>
   );
 };

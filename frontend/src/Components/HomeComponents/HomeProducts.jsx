@@ -1,38 +1,53 @@
 import React, { useEffect, useState } from "react";
 
-export default function HomeProducts() {
+export default function HomeCategories() {
   const [isVisible, setIsVisible] = useState({});
 
-  const products = [
+  const categories = [
     {
-      name: "Heritage Dining Set",
+      name: "Living Room",
       image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "NPR 85,000",
-      category: "Dining Room",
+        "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=400&h=300&fit=crop",
+      icon: "🛋️",
+      count: "25+ Items",
     },
     {
-      name: "Modern Living Sofa",
+      name: "Dining Room",
       image:
-        "https://images.unsplash.com/photo-1631679706909-1844bbd07221?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "NPR 120,000",
-      category: "Living Room",
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
+      icon: "🍽️",
+      count: "18+ Items",
     },
     {
-      name: "Traditional Wardrobe",
+      name: "Bedroom",
       image:
-        "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "NPR 95,000",
-      category: "Bedroom",
+        "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400&h=300&fit=crop",
+      icon: "🛏️",
+      count: "32+ Items",
     },
     {
-      name: "Executive Desk",
+      name: "Office",
       image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "NPR 65,000",
-      category: "Office",
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
+      icon: "💼",
+      count: "15+ Items",
+    },
+    {
+      name: "Kitchen",
+      image:
+        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop",
+      icon: "🍳",
+      count: "12+ Items",
+    },
+    {
+      name: "Outdoor",
+      image:
+        "https://images.unsplash.com/photo-1519947486511-46149fa0a254?w=400&h=300&fit=crop",
+      icon: "🌿",
+      count: "8+ Items",
     },
   ];
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -51,77 +66,83 @@ export default function HomeProducts() {
 
     return () => observer.disconnect();
   }, []);
+
   return (
     <div>
       <section
-        id="products"
+        id="categories"
         className="py-24 px-6 md:px-16 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto">
           <div
             className={`text-center mb-16 transform transition-all duration-1000 ${
-              isVisible.products
+              isVisible.categories
                 ? "translate-y-0 opacity-100"
                 : "translate-y-10 opacity-0"
             }`}
           >
             <span className="bg-gradient-to-r from-orange-600 to-blue-500 bg-clip-text text-transparent text-sm font-bold tracking-wider uppercase mb-4 block">
-              Our Collection
+              Shop by Category
             </span>
             <h2 className="text-4xl md:text-6xl font-bold text-blue-900 mb-6">
-              Featured Products
+              Browse Collections
             </h2>
             <div className="w-24 h-1.5 bg-gradient-to-r from-blue-400 to-orange-400 mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product, index) => (
-              <div
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {categories.map((category, index) => (
+              <a
                 key={index}
-                className={`group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 ${
-                  isVisible.products
+                href="/products"
+                className={`group block transform transition-all duration-300 hover:scale-105 ${
+                  isVisible.categories
                     ? "translate-y-0 opacity-100"
                     : "translate-y-10 opacity-0"
                 }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative h-48 rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-shadow duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${category.image})` }}
+                  ></div>
 
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    {product.category}
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+
+                  {/* Icon */}
+                  <div className="absolute top-4 right-4">
+                    <span className="text-2xl filter drop-shadow-lg">
+                      {category.icon}
+                    </span>
                   </div>
 
-                  {/* Hover Button */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className="bg-white text-blue-900 px-6 py-2 rounded-full font-semibold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                      View Details
-                    </button>
+                  {/* Content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 className="text-lg font-bold text-white mb-1">
+                      {category.name}
+                    </h3>
+                    <p className="text-sm text-gray-200 opacity-90">
+                      {category.count}
+                    </p>
                   </div>
-                </div>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-blue-900 mb-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-2xl font-bold text-orange-600">
-                    {product.price}
-                  </p>
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/10 transition-all duration-300"></div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-10 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105">
+          <div className="text-center mt-16">
+            <a
+              href="/products"
+              className="inline-block bg-gradient-to-r from-blue-600 to-blue-700 text-white px-10 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105"
+            >
               View All Products
-            </button>
+            </a>
           </div>
         </div>
       </section>

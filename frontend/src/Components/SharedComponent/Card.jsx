@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Phone, ShoppingCart, Plus, Minus, Star } from "lucide-react";
 
-export const Card = ({ product, onAddToCart, onQuoteRequest }) => {
+export const Card = ({ product, onQuoteRequest }) => {
   const [quantity, setQuantity] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -132,7 +132,7 @@ export const Card = ({ product, onAddToCart, onQuoteRequest }) => {
         {/* Action Buttons */}
         <div className="space-y-3">
           <button
-            onClick={() => onAddToCart(product, quantity)}
+            // onClick={() => onAddToCart(product, quantity)}
             disabled={!product.inStock}
             className={`w-full py-3 px-4 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-200 transform hover:scale-105 ${
               product.inStock

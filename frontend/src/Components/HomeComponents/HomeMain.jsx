@@ -5,11 +5,13 @@ import HomeProducts from "./HomeProducts";
 import HomeStats from "./HomeStats";
 import HomeTestimonials from "./HomeTestimonials";
 import HomeCTA from "./HomeCTA";
+import Brands from "./Brands";
 
 export default function HomeMain() {
   return (
     <div>
       <HomeHero />
+      <Brands />
       <HomeFeatures />
       <HomeProducts />
       <HomeStats />

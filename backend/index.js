@@ -1,7 +1,27 @@
 const app = require("./app");
+const { createAdmin } = require("./Controller/CreateAdmin");
+const { database } = require("./Database/database");
 
-const PORT = process.env.PORT || 3000;
+const cloudinary = require("cloudinary").v2;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const PORT = process.env.PORT;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+const startServer = async () => {
+  try {
+    await database();
+    await createAdmin();
+    app.listen(PORT, () => {
+      console.log(`🚀 Server is listening on PORT ${PORT}`);
+    });
+  } catch (err) {
+    console.error("❌ Failed to start server:", err.message);
+  }
+};
+
+startServer();
